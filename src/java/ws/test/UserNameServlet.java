@@ -22,6 +22,7 @@ public class UserNameServlet extends HttpServlet {
         HttpSession httpSession = request.getSession(true);
         String username = request.getParameter("username");
         httpSession.setAttribute("username", username);
+        System.out.println("uns >> httpsess"+httpSession.getId());
 
         if (username != null) {
             pw.println("<html>");
@@ -38,7 +39,7 @@ public class UserNameServlet extends HttpServlet {
             pw.println("	websocket.onmessage = function processMessage(message){");
             pw.println("		var jsonData = JSON.parse(message.data);");
             pw.println("		if (jsonData.message != null) {");
-            pw.println("			messagesTextArea.value += jsonData.message + \"\\n");
+            pw.println("			messagesTextArea.value += jsonData.message + \"\\n\";");
             pw.println("		}");
             pw.println("	}");
             pw.println("	function sendMessage(){");

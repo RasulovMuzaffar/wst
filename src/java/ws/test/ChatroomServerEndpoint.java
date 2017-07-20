@@ -1,5 +1,6 @@
 package ws.test;
 
+import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Collections;
 import java.util.HashSet;
@@ -24,17 +25,19 @@ public class ChatroomServerEndpoint {
     public void handleOpen(EndpointConfig endpointConfig, Session userSession) {
         userSession.getUserProperties().put("username", endpointConfig.getUserProperties().get("username"));
         chatroomUsers.add(userSession);
+
     }
 
     @OnMessage
     public void handleMessage(String message, Session userSession) {
         String username = (String) userSession.getUserProperties().get("username");
+        System.out.println("cse >> username " + username);
+        System.out.println("cse >> usersess " + userSession);
         if (username != null) {
-            chatroomUsers.stream().forEach(x -> {
+            chatroomUsers.stream().forEach((Session x) -> {
                 try {
                     x.getBasicRemote().sendText(buildJsonData(username, message));
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (IOException e) {
                 }
             });
         }
