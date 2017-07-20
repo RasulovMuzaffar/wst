@@ -38,12 +38,12 @@ public class UserNameServlet extends HttpServlet {
             pw.println("	websocket.onmessage = function processMessage(message){");
             pw.println("		var jsonData = JSON.parse(message.data);");
             pw.println("		if (jsonData.message != null) {");
-            pw.println("			messagesTextArea.value += jsonData.message;");
+            pw.println("			messagesTextArea.value += jsonData.message + \"\\n");
             pw.println("		}");
             pw.println("	}");
             pw.println("	function sendMessage(){");
             pw.println("		websocket.send(messageText.value);");
-            pw.println("		messageText.value");
+            pw.println("		messageText.value = \"\";");
             pw.println("	}");
             pw.println("</script>");
             pw.println("</body>");
