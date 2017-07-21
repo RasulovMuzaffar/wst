@@ -32,7 +32,8 @@ public class ChatroomServerEndpoint {
     public void handleMessage(String message, Session userSession) {
         String username = (String) userSession.getUserProperties().get("username");
         System.out.println("cse >> username " + username);
-        System.out.println("cse >> usersess " + userSession);
+        System.out.println("cse >> usersess " + userSession.getId());
+//        System.out.println(""+this.getClass().);
         if (username != null) {
             chatroomUsers.stream().forEach((Session x) -> {
                 try {
@@ -41,6 +42,7 @@ public class ChatroomServerEndpoint {
                 }
             });
         }
+        System.out.println("---- " + chatroomUsers.size());
     }
 
     @OnClose
